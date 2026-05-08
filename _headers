@@ -1,0 +1,50 @@
+# =============================================================
+# Netlify _headers — security headers for Glamur Event Hall
+# Place this file at the root of your deploy (same folder as
+# index.html). Netlify reads it automatically.
+# =============================================================
+
+/*
+  # Force HTTPS for one year, include subdomains
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Prevent the site from being framed (clickjacking protection)
+  X-Frame-Options: SAMEORIGIN
+
+  # Disable MIME-type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Limit referrer information leaked to other sites
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Disable browser features the site does not need
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=()
+
+  # Cross-origin isolation (safe defaults for static sites)
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-site
+
+  # Content Security Policy — restricts where resources can come from.
+  # Allows: own domain, Google Fonts, Web3Forms API, inline styles/scripts
+  # (needed because the site embeds CSS and JS in index.html).
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'self'; form-action 'self' https://api.web3forms.com https://wa.me; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+# Cache static assets aggressively
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML should always be revalidated
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

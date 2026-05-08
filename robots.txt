@@ -1,0 +1,8 @@
+# Glamur Event Hall — robots.txt
+# Permet à tous les moteurs de recherche d'indexer le site
+
+User-agent: *
+Allow: /
+
+# Localisation du sitemap
+Sitemap: https://glamureventhall.rs/sitemap.xml

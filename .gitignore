@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs / temp
+*.log
+*.tmp
+
+# Local builds / hosting artifacts
+.netlify/
+.vercel/
+node_modules/
+dist/
+build/
+
+# Secrets — keep out of git
+.env
+.env.local
+*.key
+secrets.json
