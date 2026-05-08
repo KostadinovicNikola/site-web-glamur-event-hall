@@ -231,7 +231,6 @@
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
     }
     .nav-logo {
       font-family: var(--serif);
@@ -247,6 +246,8 @@
       gap: 2.4rem;
       list-style: none;
       align-items: center;
+      margin-left: auto;
+      margin-right: 2rem;
     }
     .nav-links a {
       font-size: 0.78rem;
@@ -268,7 +269,7 @@
     .nav-links a:hover { color: var(--gold-light); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* Language switch */
+    /* Language switch — always visible, outside the collapsible menu */
     .lang-switch {
       display: flex;
       gap: 0.4rem;
@@ -1246,6 +1247,8 @@
         gap: 2.5rem;
         transition: right var(--transition);
         border-left: 1px solid var(--line);
+        margin-left: 0;
+        margin-right: 0;
       }
       .nav-links.open { right: 0; }
       .nav-links a { font-size: 1rem; }
@@ -1279,24 +1282,23 @@
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">GLAMUR <span>·</span></a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-
       <ul class="nav-links" id="navLinks">
         <li><a href="#about" data-i18n="nav.about">O nama</a></li>
         <li><a href="#services" data-i18n="nav.services">Usluge</a></li>
         <li><a href="#gallery" data-i18n="nav.gallery">Galerija</a></li>
         <li><a href="#reservation" data-i18n="nav.reservation">Rezervacija</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
-        <li>
-          <div class="lang-switch">
-            <button id="langSr" class="active">SR</button>
-            <span class="sep">/</span>
-            <button id="langEn">EN</button>
-          </div>
-        </li>
       </ul>
+
+      <div class="lang-switch">
+        <button id="langSr" class="active">SR</button>
+        <span class="sep">/</span>
+        <button id="langEn">EN</button>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -1948,7 +1950,7 @@
        Only these are rendered with innerHTML; everything else uses
        textContent (defense-in-depth against XSS). */
     const HTML_KEYS = new Set([
-      'about.title', 'services.title', 'gallery.title', 'contact.title'
+      'about.title', 'services.title', 'gallery.title', 'contact.title', 'reservation.title'
     ]);
 
     function setLang(lang) {
@@ -1965,6 +1967,9 @@
       });
       document.getElementById('langSr').classList.toggle('active', lang === 'sr');
       document.getElementById('langEn').classList.toggle('active', lang === 'en');
+      const gold = '#c9a84c', muted = 'rgba(200,200,200,0.5)';
+      document.getElementById('floatLangSr').style.color = lang === 'sr' ? gold : muted;
+      document.getElementById('floatLangEn').style.color = lang === 'en' ? gold : muted;
       try { localStorage.setItem('glamur-lang', lang); } catch(e) {}
     }
 
@@ -2282,6 +2287,29 @@
       }
     });
   </script>
+
+  <!-- Floating language toggle -->
+  <div id="floatLang" style="
+    position: fixed;
+    bottom: 8rem;
+    right: 2rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.9rem;
+    background: rgba(10,10,10,0.85);
+    border: 1px solid rgba(180,150,80,0.4);
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+  ">
+    <button id="floatLangSr" onclick="setLang('sr')" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:0.1rem 0.4rem;color:#c9a84c;">SR</button>
+    <span style="color:rgba(180,150,80,0.5);">/</span>
+    <button id="floatLangEn" onclick="setLang('en')" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:0.1rem 0.4rem;color:rgba(200,200,200,0.5);">EN</button>
+  </div>
 
 </body>
 </html>
