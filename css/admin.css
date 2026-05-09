@@ -1,0 +1,315 @@
+/* =========================================================
+   admin.css — Styles pour admin.html
+   ========================================================= */
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #1a1a1a;
+  --gold: #c9a961;
+  --gold-light: #e0c989;
+  --cream: #f5f1e8;
+  --text: #e8e4dc;
+  --text-muted: #9a958b;
+  --line: rgba(201, 169, 97, 0.25);
+  --red: #c95a5a;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Montserrat', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+}
+
+/* ---- Login ---- */
+#loginScreen {
+  width: 100%;
+  max-width: 420px;
+  margin: 8vh auto 0;
+  text-align: center;
+}
+
+.admin-logo {
+  font-family: var(--serif);
+  font-size: 2rem;
+  letter-spacing: 0.3em;
+  color: var(--cream);
+  margin-bottom: 0.3rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.3s;
+}
+.admin-logo:hover { color: var(--gold); }
+.admin-logo span { color: var(--gold); }
+
+.admin-sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+}
+
+.login-box {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+}
+.login-box h2 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--cream);
+  margin-bottom: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.field { margin-bottom: 1.2rem; text-align: left; }
+.field label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.field input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+}
+.field input:focus { outline: none; border-color: var(--gold); }
+
+.btn-login {
+  width: 100%;
+  padding: 0.95rem;
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.3s;
+}
+.btn-login:hover { background: var(--gold-light); }
+
+.login-error {
+  color: #e8a5a5;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+/* ---- Dashboard ---- */
+#dashboard { display: none; width: 100%; max-width: 780px; margin: 0 auto; }
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.dash-logo { font-size: 1.4rem; margin-bottom: 0; }
+
+.btn-logout {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-logout:hover { border-color: var(--red); color: var(--red); }
+
+/* ---- Calendrier admin ---- */
+.cal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.cal-nav h2 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--cream);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: capitalize;
+}
+.cal-arrow {
+  width: 36px; height: 36px;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.cal-arrow:hover { border-color: var(--gold); background: rgba(201,169,97,0.1); }
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 1rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: none;
+  color: var(--text);
+  position: relative;
+}
+.cal-day.empty { pointer-events: none; }
+.cal-day.past { color: #3a3835; pointer-events: none; }
+.cal-day.saturday { color: var(--gold-light); }
+.cal-day.today { border-color: var(--line); }
+.cal-day.available:hover { background: rgba(201,169,97,0.15); border-color: var(--gold); }
+.cal-day.reserved {
+  background: rgba(201, 90, 90, 0.15);
+  color: #e8a5a5;
+  border-color: rgba(201, 90, 90, 0.4);
+}
+.cal-day.reserved:hover { background: rgba(201, 90, 90, 0.3); }
+
+.cal-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  flex-wrap: wrap;
+}
+.legend-item { display: flex; align-items: center; gap: 0.5rem; }
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot.available { background: var(--gold); }
+.dot.reserved { background: var(--red); }
+
+.cal-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.2rem;
+}
+
+/* ---- Liste des dates réservées ---- */
+.reserved-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 2rem;
+}
+.reserved-card h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+.reserved-list { list-style: none; }
+.reserved-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+.reserved-list li:last-child { border-bottom: none; }
+.reserved-list .date-iso { color: var(--cream); letter-spacing: 0.05em; }
+.reserved-list .date-label { color: var(--text-muted); font-size: 0.78rem; margin-left: 0.8rem; }
+
+.btn-del {
+  background: none;
+  border: 1px solid rgba(201, 90, 90, 0.3);
+  color: #e8a5a5;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.btn-del:hover { background: rgba(201,90,90,0.15); border-color: var(--red); }
+
+.empty-state {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  padding: 1rem 0;
+  font-family: var(--serif);
+}
+
+/* ---- Toast ---- */
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--gold-light);
+  padding: 0.8rem 1.8rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#toast.show { opacity: 1; }

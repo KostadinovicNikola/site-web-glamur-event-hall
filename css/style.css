@@ -805,6 +805,18 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
 .footer-links a { color: var(--text-muted); transition: color var(--transition); }
 .footer-links a:hover { color: var(--gold); }
 
+.admin-dot {
+  display: inline-block;
+  margin-top: 1.5rem;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(201, 169, 97, 0.2);
+  transition: background 0.3s;
+}
+.admin-dot:hover { background: rgba(201, 169, 97, 0.6); }
+
+.reservation-intro { margin: 1.5rem auto 0; color: var(--text-muted); }
+
 /* ============= LIGHTBOX ============= */
 .lightbox {
   position: fixed;
