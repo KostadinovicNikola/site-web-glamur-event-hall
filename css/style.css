@@ -130,16 +130,12 @@ nav.scrolled {
 .nav-logo span { color: var(--gold); }
 
 .nav-links {
-  display: none; /* caché par défaut, affiché en desktop via media query */
+  display: none;
   gap: 2.4rem;
   list-style: none;
   align-items: center;
   margin-left: auto;
   margin-right: 2rem;
-}
-@media (min-width: 769px) {
-  .nav-links { display: flex; }
-  .nav-toggle { display: none !important; }
 }
 .nav-links a {
   font-size: 0.78rem;
@@ -1084,4 +1080,10 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
 
   /* ---- Lightbox ---- */
   .lightbox-prev, .lightbox-next { width: 40px; height: 40px; }
+}
+
+@media (min-width: 769px) {
+  .nav-links { display: flex; }
+  .nav-toggle { display: none !important; }
+  #floatLang { display: none !important; }
 }
