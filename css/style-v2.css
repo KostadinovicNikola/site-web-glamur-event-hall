@@ -991,7 +991,7 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   .gallery-item.tall { grid-row: span 1; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   /* ---- Navigation ---- */
   .nav-inner { padding: 0; }
 
@@ -1082,7 +1082,7 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   .lightbox-prev, .lightbox-next { width: 40px; height: 40px; }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .nav-links { display: flex; }
   .nav-toggle { display: none !important; }
   #floatLang { display: none !important; }
