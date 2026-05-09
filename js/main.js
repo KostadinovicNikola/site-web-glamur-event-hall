@@ -28,6 +28,12 @@ if (mobMenu) {
   mobMenu.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => toggleMobMenu(false));
   });
+  mobMenu.addEventListener('click', (e) => {
+    if (e.target === mobMenu) toggleMobMenu(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobMenu.classList.contains('open')) toggleMobMenu(false);
+  });
   document.getElementById('mobLangSr')?.addEventListener('click', () => {
     if (typeof setLang === 'function') setLang('sr');
     document.getElementById('mobLangSr').classList.add('active');
