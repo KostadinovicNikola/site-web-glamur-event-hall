@@ -107,7 +107,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- ============= STYLES ============= -->
-  <link rel="stylesheet" href="css/style-v2.css?v=11" />
+  <link rel="stylesheet" href="css/style-v2.css?v=12" />
 
   <!-- Mobile nav: burger + overlay (Maison Royal Caviar pattern) -->
   <style>
@@ -119,6 +119,9 @@
     @media (max-width: 1024px) {
       /* Hide desktop nav-links and lang-switch */
       .nav-links, .lang-switch { display: none !important; }
+
+      /* Keep nav above overlay so logo + burger stay visible when menu is open */
+      nav#nav { z-index: 1100 !important; }
 
       /* Show burger */
       .nav-burger {
@@ -133,7 +136,7 @@
         border: none;
         cursor: pointer;
         margin-left: auto;
-        z-index: 1001;
+        z-index: 1101;
         position: relative;
       }
       .nav-burger span {
@@ -281,7 +284,6 @@
 
   <!-- ============= MOBILE MENU OVERLAY ============= -->
   <div class="mob-menu" id="mobMenu" aria-hidden="true">
-    <a href="#hero" class="mob-menu-logo">GLAMUR <span>·</span></a>
     <a href="#about" data-i18n="nav.about">O nama</a>
     <a href="#services" data-i18n="nav.services">Usluge</a>
     <a href="#gallery" data-i18n="nav.gallery">Galerija</a>
