@@ -947,7 +947,7 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   bottom: 12rem;
   right: 2rem;
   z-index: 9999;
-  display: flex;
+  display: none; /* caché sur desktop, affiché en mobile via media query */
   align-items: center;
   gap: 0.3rem;
   padding: 0.4rem 0.9rem;
@@ -1034,10 +1034,11 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
     justify-content: center;
   }
 
-  /* ---- Float lang — repositionné pour ne pas chevaucher les boutons ---- */
+  /* ---- Float lang — visible sur mobile, dans la barre nav ---- */
   #floatLang {
+    display: flex;
     bottom: auto;
-    top: 1.2rem;
+    top: 1rem;
     right: 4.5rem;
   }
 
