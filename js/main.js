@@ -8,26 +8,37 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-/* ---------- Menu mobile ---------- */
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  const isOpening = !navLinks.classList.contains('open');
-  navLinks.classList.toggle('open');
-  navToggle.classList.toggle('open');
-  if (isOpening) {
-    navLinks.style.setProperty('display', 'flex', 'important');
-  } else {
-    navLinks.style.setProperty('display', 'none', 'important');
-  }
-});
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.classList.remove('open');
-    navLinks.style.setProperty('display', 'none', 'important');
+/* ---------- Menu mobile (burger + overlay) ---------- */
+const navBurger = document.getElementById('navBurger');
+const mobMenu = document.getElementById('mobMenu');
+function toggleMobMenu(open) {
+  if (!nav || !navBurger || !mobMenu) return;
+  nav.classList.toggle('open', open);
+  mobMenu.classList.toggle('open', open);
+  navBurger.setAttribute('aria-expanded', open);
+  mobMenu.setAttribute('aria-hidden', !open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+if (navBurger) {
+  navBurger.addEventListener('click', () => {
+    toggleMobMenu(!mobMenu.classList.contains('open'));
   });
-});
+}
+if (mobMenu) {
+  mobMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => toggleMobMenu(false));
+  });
+  document.getElementById('mobLangSr')?.addEventListener('click', () => {
+    if (typeof setLang === 'function') setLang('sr');
+    document.getElementById('mobLangSr').classList.add('active');
+    document.getElementById('mobLangEn').classList.remove('active');
+  });
+  document.getElementById('mobLangEn')?.addEventListener('click', () => {
+    if (typeof setLang === 'function') setLang('en');
+    document.getElementById('mobLangEn').classList.add('active');
+    document.getElementById('mobLangSr').classList.remove('active');
+  });
+}
 
 /* ---------- Révélation au scroll ---------- */
 const revealObserver = new IntersectionObserver(entries => {

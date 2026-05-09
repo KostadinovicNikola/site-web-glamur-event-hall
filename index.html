@@ -107,54 +107,111 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- ============= STYLES ============= -->
-  <link rel="stylesheet" href="css/style-v2.css?v=8" />
+  <link rel="stylesheet" href="css/style-v2.css?v=9" />
 
-  <!-- Mobile-first nav: burger by default, full nav only at desktop -->
+  <!-- Mobile nav: burger + overlay (Maison Royal Caviar pattern) -->
   <style>
-    /* Mobile defaults (apply everywhere) */
-    .nav-links { display: none !important; }
-    .nav-links.open { display: flex !important; }
-    .nav-toggle { display: flex !important; }
-    .lang-switch { display: none !important; }
-    #floatLang { display: flex !important; }
+    /* === Burger & overlay hidden by default (desktop) === */
+    .nav-burger { display: none; }
+    .mob-menu { display: none; }
 
-    /* Desktop overrides */
+    /* === MOBILE STYLES === */
+    @media (max-width: 1024px) {
+      /* Hide desktop nav-links and lang-switch */
+      .nav-links, .lang-switch { display: none !important; }
+
+      /* Show burger */
+      .nav-burger {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        padding: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: auto;
+        z-index: 1001;
+        position: relative;
+      }
+      .nav-burger span {
+        display: block;
+        width: 22px;
+        height: 1px;
+        background: var(--gold-light, #e0c989);
+        transition: transform .35s ease, opacity .25s ease;
+        transform-origin: center;
+      }
+      nav.open .nav-burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+      nav.open .nav-burger span:nth-child(2) { opacity: 0; }
+      nav.open .nav-burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+      /* Overlay menu */
+      .mob-menu {
+        display: flex !important;
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: rgba(10,10,10,.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .35s ease;
+        gap: 1.5rem;
+      }
+      .mob-menu.open { opacity: 1; pointer-events: auto; }
+      .mob-menu a {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.5rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--cream, #f5f1e8);
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+      }
+      .mob-menu a:hover, .mob-menu a:active { color: var(--gold-light, #e0c989); }
+      .mob-menu .mob-langs {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+        align-items: center;
+      }
+      .mob-menu .mob-langs button {
+        background: none;
+        border: 1px solid rgba(201,169,97,0.4);
+        color: var(--gold-light, #e0c989);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        padding: 0.4rem 0.9rem;
+        cursor: pointer;
+        border-radius: 999px;
+      }
+      .mob-menu .mob-langs button.active {
+        background: var(--gold, #c9a961);
+        color: var(--bg, #0a0a0a);
+      }
+
+      /* Make sure the float lang is hidden — it's redundant now */
+      #floatLang { display: none !important; }
+    }
+
+    /* === DESKTOP STYLES === */
     @media (min-width: 1025px) {
       .nav-links { display: flex !important; }
-      .nav-toggle { display: none !important; }
       .lang-switch { display: flex !important; }
+      .nav-burger { display: none !important; }
+      .mob-menu { display: none !important; }
+      .nav-toggle { display: none !important; }
       #floatLang { display: none !important; }
     }
   </style>
-
-  <!-- Failsafe: enforce mobile/desktop nav state via JS regardless of cache -->
-  <script>
-    (function() {
-      function applyNavLayout() {
-        var isDesktop = window.matchMedia('(min-width: 1025px)').matches;
-        var navLinks = document.getElementById('navLinks');
-        var navToggle = document.getElementById('navToggle');
-        var langSwitch = document.querySelector('.lang-switch');
-        var floatLang = document.getElementById('floatLang');
-        if (!navLinks) return;
-        if (isDesktop) {
-          navLinks.style.setProperty('display', 'flex', 'important');
-          if (navToggle) navToggle.style.setProperty('display', 'none', 'important');
-          if (langSwitch) langSwitch.style.setProperty('display', 'flex', 'important');
-          if (floatLang) floatLang.style.setProperty('display', 'none', 'important');
-        } else {
-          if (!navLinks.classList.contains('open')) {
-            navLinks.style.setProperty('display', 'none', 'important');
-          }
-          if (navToggle) navToggle.style.setProperty('display', 'flex', 'important');
-          if (langSwitch) langSwitch.style.setProperty('display', 'none', 'important');
-          if (floatLang) floatLang.style.setProperty('display', 'flex', 'important');
-        }
-      }
-      document.addEventListener('DOMContentLoaded', applyNavLayout);
-      window.addEventListener('resize', applyNavLayout);
-    })();
-  </script>
 
 </head>
 
@@ -179,11 +236,24 @@
         <button id="langEn">EN</button>
       </div>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
+
+  <!-- ============= MOBILE MENU OVERLAY ============= -->
+  <div class="mob-menu" id="mobMenu" aria-hidden="true">
+    <a href="#about" data-i18n="nav.about">O nama</a>
+    <a href="#services" data-i18n="nav.services">Usluge</a>
+    <a href="#gallery" data-i18n="nav.gallery">Galerija</a>
+    <a href="#reservation" data-i18n="nav.reservation">Rezervacija</a>
+    <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+    <div class="mob-langs">
+      <button id="mobLangSr" class="active">SR</button>
+      <button id="mobLangEn">EN</button>
+    </div>
+  </div>
 
   <!-- ============= HERO ============= -->
   <header class="hero" id="hero">
