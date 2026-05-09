@@ -144,15 +144,23 @@ async function toggleDate(iso, reserve) {
 
 function renderReservedList() {
   const list = document.getElementById('reservedList');
+  const title = document.getElementById('reservedListTitle');
   list.innerHTML = '';
 
-  const sorted = [...reservedDates].sort();
-  if (sorted.length === 0) {
-    list.innerHTML = '<li><span class="empty-state">Nema rezervisanih datuma.</span></li>';
+  const year = calCursor.getFullYear();
+  const month = calCursor.getMonth();
+  const prefix = `${year}-${pad(month + 1)}`;
+
+  title.textContent = `Rezervisani datumi — ${monthNames[month]} ${year}`;
+
+  const filtered = [...reservedDates].filter(iso => iso.startsWith(prefix)).sort();
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<li><span class="empty-state">Nema rezervisanih datuma za ovaj mesec.</span></li>';
     return;
   }
 
-  sorted.forEach(iso => {
+  filtered.forEach(iso => {
     const li = document.createElement('li');
     li.innerHTML = `
       <span>
@@ -170,10 +178,12 @@ function startCalendar() {
   document.getElementById('calPrev').addEventListener('click', () => {
     calCursor.setMonth(calCursor.getMonth() - 1);
     renderCalendar();
+    renderReservedList();
   });
   document.getElementById('calNext').addEventListener('click', () => {
     calCursor.setMonth(calCursor.getMonth() + 1);
     renderCalendar();
+    renderReservedList();
   });
 
   if (unsubscribe) unsubscribe();
