@@ -98,7 +98,7 @@ section {
 }
 
 /* ============= NAVIGATION ============= */
-nav {
+nav#nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
@@ -109,7 +109,7 @@ nav {
   transition: all var(--transition);
   border-bottom: 1px solid transparent;
 }
-nav.scrolled {
+nav#nav.scrolled {
   background: rgba(10, 10, 10, 0.92);
   border-bottom-color: var(--line);
   padding: 1rem 2rem;
@@ -991,7 +991,7 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   .gallery-item.tall { grid-row: span 1; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   /* ---- Navigation ---- */
   .nav-inner { padding: 0; }
 
@@ -1082,7 +1082,7 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   .lightbox-prev, .lightbox-next { width: 40px; height: 40px; }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .nav-links { display: flex; }
   .nav-toggle { display: none !important; }
   #floatLang { display: none !important; }
