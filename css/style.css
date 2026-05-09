@@ -993,32 +993,54 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
 
 @media (max-width: 768px) {
   /* ---- Navigation ---- */
+  .nav-inner { padding: 0; }
+
   .nav-links {
+    display: none;
     position: fixed;
-    top: 0; right: -100%;
+    top: 0; left: 0;
     height: 100vh;
-    width: 80%;
-    max-width: 320px;
+    width: 100%;
     background: rgba(10, 10, 10, 0.98);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 2.5rem;
-    transition: right var(--transition);
-    border-left: 1px solid var(--line);
-    margin-left: 0;
-    margin-right: 0;
-    z-index: 1000;
+    z-index: 999;
+    list-style: none;
+    margin: 0;
   }
-  .nav-links.open { right: 0; }
-  .nav-links a { font-size: 1.1rem; }
-  .nav-toggle { display: flex; }
+  .nav-links.open { display: flex; }
+  .nav-links a {
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+  }
+
+  .lang-switch { display: none; }
+
+  .nav-toggle {
+    display: flex;
+    margin-left: auto;
+    z-index: 1001;
+    position: relative;
+  }
   .nav-toggle.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
 
-  /* Cacher le toggle SR/EN dans la nav — remplacé par #floatLang */
-  .lang-switch { display: none; }
+  /* ---- SR/EN flottant — visible sur mobile ---- */
+  #floatLang {
+    display: flex;
+    position: fixed;
+    top: 1.1rem;
+    right: 4rem;
+    bottom: auto;
+    z-index: 1001;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.65rem;
+  }
 
   /* ---- Hero ---- */
   .hero-cta {
@@ -1030,19 +1052,12 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   }
   .hero-cta .btn {
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     justify-content: center;
   }
+  .scroll-indicator { display: none; }
 
-  /* ---- Float lang — visible sur mobile, dans la barre nav ---- */
-  #floatLang {
-    display: flex;
-    bottom: auto;
-    top: 1rem;
-    right: 4.5rem;
-  }
-
-  /* ---- Formulaire & layout ---- */
+  /* ---- Layout général ---- */
   .form-row { grid-template-columns: 1fr; }
   .contact-form { padding: 2rem 1.5rem; }
   .about-stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
@@ -1058,9 +1073,9 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   .cal-day { font-size: 0.85rem; }
   .calendar-weekdays { font-size: 0.55rem; letter-spacing: 0.05em; }
 
-  /* ---- Boutons flottants WhatsApp/Viber ---- */
-  .chat-float { bottom: 1rem; right: 1rem; }
-  .chat-btn { width: 50px; height: 50px; }
+  /* ---- WhatsApp/Viber ---- */
+  .chat-float { bottom: 1rem; right: 1rem; gap: 0.5rem; }
+  .chat-btn { width: 48px; height: 48px; }
   .chat-btn::before { display: none; }
 
   /* ---- Lightbox ---- */
