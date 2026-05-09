@@ -991,7 +991,7 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
   .gallery-item.tall { grid-row: span 1; }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   /* ---- Navigation ---- */
   .nav-links {
     position: fixed;
