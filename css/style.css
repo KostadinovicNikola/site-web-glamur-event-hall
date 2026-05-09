@@ -130,12 +130,16 @@ nav.scrolled {
 .nav-logo span { color: var(--gold); }
 
 .nav-links {
-  display: flex;
+  display: none; /* caché par défaut, affiché en desktop via media query */
   gap: 2.4rem;
   list-style: none;
   align-items: center;
   margin-left: auto;
   margin-right: 2rem;
+}
+@media (min-width: 769px) {
+  .nav-links { display: flex; }
+  .nav-toggle { display: none !important; }
 }
 .nav-links a {
   font-size: 0.78rem;
