@@ -12,13 +12,20 @@ window.addEventListener('scroll', () => {
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 navToggle.addEventListener('click', () => {
+  const isOpening = !navLinks.classList.contains('open');
   navLinks.classList.toggle('open');
   navToggle.classList.toggle('open');
+  if (isOpening) {
+    navLinks.style.setProperty('display', 'flex', 'important');
+  } else {
+    navLinks.style.setProperty('display', 'none', 'important');
+  }
 });
 navLinks.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     navLinks.classList.remove('open');
     navToggle.classList.remove('open');
+    navLinks.style.setProperty('display', 'none', 'important');
   });
 });
 

@@ -127,6 +127,35 @@
     }
   </style>
 
+  <!-- Failsafe: enforce mobile/desktop nav state via JS regardless of cache -->
+  <script>
+    (function() {
+      function applyNavLayout() {
+        var isDesktop = window.matchMedia('(min-width: 1025px)').matches;
+        var navLinks = document.getElementById('navLinks');
+        var navToggle = document.getElementById('navToggle');
+        var langSwitch = document.querySelector('.lang-switch');
+        var floatLang = document.getElementById('floatLang');
+        if (!navLinks) return;
+        if (isDesktop) {
+          navLinks.style.setProperty('display', 'flex', 'important');
+          if (navToggle) navToggle.style.setProperty('display', 'none', 'important');
+          if (langSwitch) langSwitch.style.setProperty('display', 'flex', 'important');
+          if (floatLang) floatLang.style.setProperty('display', 'none', 'important');
+        } else {
+          if (!navLinks.classList.contains('open')) {
+            navLinks.style.setProperty('display', 'none', 'important');
+          }
+          if (navToggle) navToggle.style.setProperty('display', 'flex', 'important');
+          if (langSwitch) langSwitch.style.setProperty('display', 'none', 'important');
+          if (floatLang) floatLang.style.setProperty('display', 'flex', 'important');
+        }
+      }
+      document.addEventListener('DOMContentLoaded', applyNavLayout);
+      window.addEventListener('resize', applyNavLayout);
+    })();
+  </script>
+
 </head>
 
 <body>
