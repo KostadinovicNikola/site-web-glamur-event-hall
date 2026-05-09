@@ -98,7 +98,7 @@ section {
 }
 
 /* ============= NAVIGATION ============= */
-nav {
+nav#nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
@@ -109,7 +109,7 @@ nav {
   transition: all var(--transition);
   border-bottom: 1px solid transparent;
 }
-nav.scrolled {
+nav#nav.scrolled {
   background: rgba(10, 10, 10, 0.92);
   border-bottom-color: var(--line);
   padding: 1rem 2rem;
