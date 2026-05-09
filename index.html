@@ -106,6 +106,20 @@
   <!-- ============= STYLES ============= -->
   <link rel="stylesheet" href="css/style.css?v=6" />
 
+  <!-- Mobile nav override — force burger visible -->
+  <style>
+    @media (max-width: 768px) {
+      .nav-links { display: none !important; }
+      .nav-links.open { display: flex !important; }
+      .nav-toggle { display: flex !important; }
+      .lang-switch { display: none !important; }
+    }
+    @media (min-width: 769px) {
+      .nav-links { display: flex !important; }
+      .nav-toggle { display: none !important; }
+    }
+  </style>
+
 </head>
 
 <body>
