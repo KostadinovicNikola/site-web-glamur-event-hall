@@ -48,7 +48,7 @@ onAuthStateChanged(auth, user => {
     dashboard.style.display = 'block';
     startCalendar();
   } else {
-    loginScreen.style.display = 'flex';
+    loginScreen.style.display = 'block';
     dashboard.style.display = 'none';
     loginBtn.textContent = 'Se connecter';
   }
