@@ -1,14 +1,10 @@
 /* =========================================================
-   calendar.js — Widget de réservation
-   Pour marquer une date comme réservée :
-   ajouter la date en format ISO dans le tableau reservedDates.
-   Exemple : '2026-07-19'
+   calendar.js — Widget de réservation connecté à Firestore
+   Les dates réservées sont gérées depuis admin.html
    ========================================================= */
 
-const reservedDates = [
-  // '2026-06-15',
-  // '2026-07-04',
-];
+import { db } from './firebase.js';
+import { collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const monthNames = {
   sr: ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'],
@@ -21,6 +17,8 @@ const weekdayNames = {
 
 let calCursor = new Date();
 calCursor.setDate(1);
+
+let reservedDates = new Set();
 
 function pad(n) { return String(n).padStart(2, '0'); }
 function isoOf(d) {
@@ -49,7 +47,7 @@ function renderCalendar() {
   const month = calCursor.getMonth();
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
-  const offset = (firstDay.getDay() + 6) % 7; // lundi = 0
+  const offset = (firstDay.getDay() + 6) % 7;
 
   for (let i = 0; i < offset; i++) {
     const d = document.createElement('div');
@@ -72,7 +70,7 @@ function renderCalendar() {
 
     if (date < today) {
       btn.classList.add('past');
-    } else if (reservedDates.includes(iso)) {
+    } else if (reservedDates.has(iso)) {
       btn.classList.add('reserved');
       btn.setAttribute('aria-label', iso + ' — reserved');
     } else {
@@ -113,7 +111,11 @@ document.getElementById('calNext').addEventListener('click', () => {
   renderCalendar();
 });
 
-renderCalendar();
+/* Écoute Firestore en temps réel — re-render à chaque changement */
+onSnapshot(collection(db, 'reservations'), snapshot => {
+  reservedDates = new Set(snapshot.docs.map(doc => doc.id));
+  renderCalendar();
+});
 
 /* Re-render quand la langue change */
 const _origSetLang = setLang;

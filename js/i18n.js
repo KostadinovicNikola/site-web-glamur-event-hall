@@ -230,6 +230,9 @@ function setLang(lang) {
   try { localStorage.setItem('glamur-lang', lang); } catch(e) {}
 }
 
+/* Expose setLang globalement pour les modules ES (calendar.js) */
+window.setLang = setLang;
+
 /* Initialisation */
 document.getElementById('langSr').addEventListener('click', () => setLang('sr'));
 document.getElementById('langEn').addEventListener('click', () => setLang('en'));
