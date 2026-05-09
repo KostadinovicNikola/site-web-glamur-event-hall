@@ -32,7 +32,7 @@ loginBtn.addEventListener('click', async () => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (e) {
     loginError.style.display = 'block';
-    loginBtn.textContent = 'Se connecter';
+    loginBtn.textContent = 'Prijavi se';
   }
 });
 
@@ -50,13 +50,13 @@ onAuthStateChanged(auth, user => {
   } else {
     loginScreen.style.display = 'block';
     dashboard.style.display = 'none';
-    loginBtn.textContent = 'Se connecter';
+    loginBtn.textContent = 'Prijavi se';
   }
 });
 
 /* ---------- Calendrier admin ---------- */
-const monthNames = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-const weekdays = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const monthNames = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];
+const weekdays = ['Pon','Uto','Sre','Čet','Pet','Sub','Ned'];
 
 let calCursor = new Date();
 calCursor.setDate(1);
@@ -132,13 +132,13 @@ async function toggleDate(iso, reserve) {
   try {
     if (reserve) {
       await setDoc(doc(db, 'reservations', iso), { date: iso });
-      showToast(`✓ ${friendlyDate(iso)} marqué comme réservé`);
+      showToast(`✓ ${friendlyDate(iso)} — rezervisano`);
     } else {
       await deleteDoc(doc(db, 'reservations', iso));
-      showToast(`✓ ${friendlyDate(iso)} libéré`);
+      showToast(`✓ ${friendlyDate(iso)} — oslobođeno`);
     }
   } catch (e) {
-    showToast('Erreur — réessayez');
+    showToast('Greška — pokušajte ponovo');
   }
 }
 
@@ -148,7 +148,7 @@ function renderReservedList() {
 
   const sorted = [...reservedDates].sort();
   if (sorted.length === 0) {
-    list.innerHTML = '<li><span class="empty-state">Aucune date réservée.</span></li>';
+    list.innerHTML = '<li><span class="empty-state">Nema rezervisanih datuma.</span></li>';
     return;
   }
 
@@ -159,7 +159,7 @@ function renderReservedList() {
         <span class="date-iso">${friendlyDate(iso)}</span>
         <span class="date-label">${iso}</span>
       </span>
-      <button class="btn-del" data-iso="${iso}">Libérer</button>
+      <button class="btn-del" data-iso="${iso}">Oslobodi</button>
     `;
     li.querySelector('.btn-del').addEventListener('click', () => toggleDate(iso, false));
     list.appendChild(li);
