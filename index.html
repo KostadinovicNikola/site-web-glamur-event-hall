@@ -109,17 +109,21 @@
   <!-- ============= STYLES ============= -->
   <link rel="stylesheet" href="css/style-v2.css?v=8" />
 
-  <!-- Mobile nav override — force burger visible -->
+  <!-- Mobile-first nav: burger by default, full nav only at desktop -->
   <style>
-    @media (max-width: 1024px) {
-      .nav-links { display: none !important; }
-      .nav-links.open { display: flex !important; }
-      .nav-toggle { display: flex !important; }
-      .lang-switch { display: none !important; }
-    }
+    /* Mobile defaults (apply everywhere) */
+    .nav-links { display: none !important; }
+    .nav-links.open { display: flex !important; }
+    .nav-toggle { display: flex !important; }
+    .lang-switch { display: none !important; }
+    #floatLang { display: flex !important; }
+
+    /* Desktop overrides */
     @media (min-width: 1025px) {
       .nav-links { display: flex !important; }
       .nav-toggle { display: none !important; }
+      .lang-switch { display: flex !important; }
+      #floatLang { display: none !important; }
     }
   </style>
 
