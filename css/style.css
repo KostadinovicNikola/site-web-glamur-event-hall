@@ -992,6 +992,7 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
 }
 
 @media (max-width: 720px) {
+  /* ---- Navigation ---- */
   .nav-links {
     position: fixed;
     top: 0; right: -100%;
@@ -1007,27 +1008,60 @@ footer p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.15em; 
     border-left: 1px solid var(--line);
     margin-left: 0;
     margin-right: 0;
+    z-index: 1000;
   }
   .nav-links.open { right: 0; }
-  .nav-links a { font-size: 1rem; }
+  .nav-links a { font-size: 1.1rem; }
   .nav-toggle { display: flex; }
   .nav-toggle.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
 
+  /* Cacher le toggle SR/EN dans la nav — remplacé par #floatLang */
+  .lang-switch { display: none; }
+
+  /* ---- Hero ---- */
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+  .hero-cta .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
+  /* ---- Float lang — repositionné pour ne pas chevaucher les boutons ---- */
+  #floatLang {
+    bottom: auto;
+    top: 1.2rem;
+    right: 4.5rem;
+  }
+
+  /* ---- Formulaire & layout ---- */
   .form-row { grid-template-columns: 1fr; }
   .contact-form { padding: 2rem 1.5rem; }
   .about-stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
   .stat-num { font-size: 1.8rem; }
   .stat-label { font-size: 0.6rem; letter-spacing: 0.15em; }
+
+  /* ---- Galerie ---- */
   .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 280px; }
   .gallery-item.wide { grid-column: span 1; }
+
+  /* ---- Calendrier ---- */
   .calendar-wrapper { padding: 1.5rem 1rem; }
-  .cal-day { font-size: 0.9rem; }
-  .calendar-weekdays { font-size: 0.6rem; letter-spacing: 0.1em; }
+  .cal-day { font-size: 0.85rem; }
+  .calendar-weekdays { font-size: 0.55rem; letter-spacing: 0.05em; }
+
+  /* ---- Boutons flottants WhatsApp/Viber ---- */
   .chat-float { bottom: 1rem; right: 1rem; }
   .chat-btn { width: 50px; height: 50px; }
   .chat-btn::before { display: none; }
+
+  /* ---- Lightbox ---- */
   .lightbox-prev, .lightbox-next { width: 40px; height: 40px; }
-  #floatLang { bottom: 8rem; right: 1rem; }
 }
