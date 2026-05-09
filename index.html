@@ -107,7 +107,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- ============= STYLES ============= -->
-  <link rel="stylesheet" href="css/style-v2.css?v=10" />
+  <link rel="stylesheet" href="css/style-v2.css?v=11" />
 
   <!-- Mobile nav: burger + overlay (Maison Royal Caviar pattern) -->
   <style>
@@ -154,7 +154,10 @@
         position: fixed;
         inset: 0;
         z-index: 999;
-        background: rgba(10,10,10,.97);
+        background:
+          radial-gradient(ellipse at top, rgba(201,169,97,0.12) 0%, transparent 60%),
+          radial-gradient(ellipse at bottom, rgba(201,169,97,0.08) 0%, transparent 50%),
+          linear-gradient(180deg, rgba(20,20,20,0.96) 0%, rgba(10,10,10,0.98) 100%);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
@@ -165,7 +168,36 @@
         transition: opacity .35s ease;
         gap: 1.5rem;
       }
+      .mob-menu::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(201,169,97,0.5), transparent);
+      }
+      .mob-menu::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(201,169,97,0.5), transparent);
+      }
       .mob-menu.open { opacity: 1; pointer-events: auto; }
+      .mob-menu-logo {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.6rem;
+        letter-spacing: 0.4em;
+        color: var(--cream, #f5f1e8);
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+      .mob-menu-logo span { color: var(--gold, #c9a961); }
       .mob-menu a {
         font-family: 'Cormorant Garamond', Georgia, serif;
         font-size: 1.5rem;
@@ -174,6 +206,8 @@
         color: var(--cream, #f5f1e8);
         text-decoration: none;
         padding: 0.6rem 1.2rem;
+        position: relative;
+        z-index: 1;
       }
       .mob-menu a:hover, .mob-menu a:active { color: var(--gold-light, #e0c989); }
       .mob-menu .mob-langs {
@@ -181,6 +215,8 @@
         gap: 0.6rem;
         margin-top: 1.5rem;
         align-items: center;
+        position: relative;
+        z-index: 1;
       }
       .mob-menu .mob-langs button {
         background: none;
@@ -244,6 +280,7 @@
 
   <!-- ============= MOBILE MENU OVERLAY ============= -->
   <div class="mob-menu" id="mobMenu" aria-hidden="true">
+    <div class="mob-menu-logo">GLAMUR <span>·</span></div>
     <a href="#about" data-i18n="nav.about">O nama</a>
     <a href="#services" data-i18n="nav.services">Usluge</a>
     <a href="#gallery" data-i18n="nav.gallery">Galerija</a>
