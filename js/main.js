@@ -79,6 +79,41 @@ for (let i = 0; i < 30; i++) {
   sparkleContainer.appendChild(s);
 }
 
+/* ---------- Contrôles vidéos atmosfera ---------- */
+document.querySelectorAll('.ig-card').forEach(card => {
+  const video = card.querySelector('video');
+  const playBtn = card.querySelector('.ig-play');
+  const restartBtn = card.querySelector('.ig-restart');
+  if (!video || !playBtn || !restartBtn) return;
+
+  playBtn.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+      card.classList.remove('paused');
+    } else {
+      video.pause();
+      card.classList.add('paused');
+    }
+  });
+
+  restartBtn.addEventListener('click', () => {
+    video.currentTime = 0;
+    video.play();
+    card.classList.remove('paused');
+  });
+
+  video.addEventListener('play', () => card.classList.remove('paused'));
+  video.addEventListener('pause', () => card.classList.add('paused'));
+
+  // Sur mobile, le hover n'existe pas — un tap sur la vidéo affiche les contrôles
+  card.addEventListener('click', (e) => {
+    if (e.target === video) {
+      const controls = card.querySelector('.ig-controls');
+      controls.classList.toggle('visible');
+    }
+  });
+});
+
 /* ---------- Formulaire de contact (Web3Forms) ----------
    Pour activer : remplacer REPLACE_WITH_WEB3FORMS_KEY dans
    index.html par ta clé obtenue sur https://web3forms.com

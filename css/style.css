@@ -544,6 +544,51 @@ nav#nav.scrolled {
   object-fit: cover;
   display: block;
 }
+.ig-controls {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(10,10,10,0.7), transparent);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+.ig-card:hover .ig-controls,
+.ig-card:focus-within .ig-controls,
+.ig-controls.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.ig-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 97, 0.5);
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.ig-btn:hover {
+  background: var(--gold);
+  color: var(--bg);
+  border-color: var(--gold);
+}
+.ig-btn svg {
+  width: 18px;
+  height: 18px;
+}
+.ig-btn .ig-icon-play { display: none; }
+.ig-card.paused .ig-btn .ig-icon-pause { display: none; }
+.ig-card.paused .ig-btn .ig-icon-play { display: inline-block; }
 
 .gallery-grid {
   display: grid;
