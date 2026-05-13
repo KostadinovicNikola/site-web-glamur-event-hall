@@ -536,13 +536,13 @@ nav#nav.scrolled {
   transform: translateY(-4px);
   border-color: var(--gold);
 }
-.ig-card iframe {
+.ig-card video {
   position: absolute;
-  inset: -60px 0 -120px 0;
+  inset: 0;
   width: 100%;
-  height: calc(100% + 180px);
-  border: none;
-  pointer-events: auto;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .gallery-grid {
