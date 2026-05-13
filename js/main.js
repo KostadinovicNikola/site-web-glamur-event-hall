@@ -105,12 +105,19 @@ document.querySelectorAll('.ig-card').forEach(card => {
   video.addEventListener('play', () => card.classList.remove('paused'));
   video.addEventListener('pause', () => card.classList.add('paused'));
 
-  // Sur mobile, le hover n'existe pas — un tap sur la vidéo affiche les contrôles
-  card.addEventListener('click', (e) => {
-    if (e.target === video) {
-      const controls = card.querySelector('.ig-controls');
-      controls.classList.toggle('visible');
+  // Tap/clic sur la vidéo: bascule play/pause + affiche les contrôles
+  video.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
     }
+    const controls = card.querySelector('.ig-controls');
+    controls.classList.add('visible');
+    clearTimeout(card._hideControlsTimer);
+    card._hideControlsTimer = setTimeout(() => {
+      controls.classList.remove('visible');
+    }, 2500);
   });
 });
 
