@@ -515,18 +515,34 @@ nav#nav.scrolled {
 
 .ig-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-  max-width: 1100px;
-  margin: 0 auto 3rem;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 360px));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  justify-content: center;
 }
-.ig-grid .instagram-media {
-  margin: 0 auto !important;
-  min-width: 0 !important;
-  width: 100% !important;
-  max-width: 540px !important;
-  border-radius: 8px !important;
+.ig-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  transition: transform var(--transition), border-color var(--transition);
+}
+.ig-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+}
+.ig-card iframe {
+  position: absolute;
+  inset: -60px 0 -120px 0;
+  width: 100%;
+  height: calc(100% + 180px);
+  border: none;
+  pointer-events: auto;
 }
 
 .gallery-grid {
